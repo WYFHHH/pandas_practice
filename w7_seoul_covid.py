@@ -16,9 +16,10 @@ data = title.text
 
 driver.close()
 
-data2
+data
 data2 = data[:]
-dt = data2.replace('\n', ' ').split(' ')
+data2
+data2 = data2.replace('\n', ' ').split(' ')
 data2.split(' ')
 type(data)
 
@@ -31,6 +32,15 @@ dt2
 len(dt3)
 
 for i in range(666):
-    if i%6
+    if i%6 == 0:
+        list0.append(dt3[i])
 
-real_data = {}
+list0
+
+
+import pandas as pd
+
+df = pd.DataFrame(data2)
+df.head(17)
+
+df.to_numpy()
