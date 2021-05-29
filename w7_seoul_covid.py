@@ -211,7 +211,8 @@ daily_case.head()
 df_daily_case = df['확진일자'].value_counts()
 df_daily_case.head()
 
-all_day = df_days.merge(df_daily_case,
+all_day = days.merge(df_daily_case,
                         left_on = '확진일자',
                         right_on = df_daily_case.index, how = 'left')
 all_day.head()
+
