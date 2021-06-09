@@ -89,39 +89,40 @@ a.iloc[0,1] = 5
 a.iloc[1,2] = 11
 a
 a.value_counts().idxmax()
-# ###################
-# from urllib.request import urlopen
-# from urllib.parse import urlencode, unquote, quote_plus
+###################
+from urllib.request import urlopen
+from urllib.parse import urlencode, unquote, quote_plus
 
-# import pandas as pd
-# import xmltodict
-# import json
+import pandas as pd
+import xmltodict
+import json
 
-# key = '%2Bn6sp%2BC0PPCjdXCvaUOBOw40kXcyTxDHkl5NVIR0cGwPcstPd0exjN5htFO8mY7ni06KEd8FQ3D5HbcK%2BCrFhQ%3D%3D'
-# url = f'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey={key}&'
-# queryParams = urlencode({quote_plus('pageNo') : 1,
-#                          quote_plus('numOfRows') : 10,
-#                          quote_plus('startCreateDt') : '20210119',
-#                          quote_plus('endCreateDt') : '20210220'})
+key = '%2Bn6sp%2BC0PPCjdXCvaUOBOw40kXcyTxDHkl5NVIR0cGwPcstPd0exjN5htFO8mY7ni06KEd8FQ3D5HbcK%2BCrFhQ%3D%3D'
+url = f'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey={key}&'
+queryParams = urlencode({quote_plus('pageNo') : 1,
+                         quote_plus('numOfRows') : 10,
+                         quote_plus('startCreateDt') : '20210119',
+                         quote_plus('endCreateDt') : '20210120'})
 
-# url2 = url + queryParams
-# response = urlopen(url2)
-# #print(type(response)) # HTTPS response
-# results = response.read().decode('utf-8')
-# # print(type(results)) # str
-# results_to_json = xmltodict.parse(results)
-# data = json.loads(json.dumps(results_to_json))
-# print(type(data)) # dict
-# print(data)
-# my_data = data['response']['body']['items']['item'][:]
-
+url2 = url + queryParams
+response = urlopen(url2)
+#print(type(response)) # HTTPS response
+results = response.read().decode('utf-8')
+# print(type(results)) # str
+results_to_json = xmltodict.parse(results)
+data = json.loads(json.dumps(results_to_json))
+print(type(data)) # dict
+print(data)
 
 
-# df = pd.DataFrame(my_data)
-# df = df[['stateDt', 'decideCnt', 'clearCnt','careCnt', 'deathCnt']]
-# df.columns = ['날짜', '누적확진자', '격리해제환자', '치료중환자', '사망자수']
-# df = df.sort_values(by='날짜')
-# df
+my_data = data['response']['body']['items']['item'][:]
+
+
+df = pd.DataFrame(my_data)
+df = df[['stateDt', 'decideCnt', 'clearCnt','careCnt', 'deathCnt']]
+df.columns = ['날짜', '누적확진자', '격리해제환자', '치료중환자', '사망자수']
+df = df.sort_values(by='날짜')
+df
 ###########
 # traget
 # STATE_DT
@@ -155,3 +156,26 @@ df_sel
 
 a = (df['수학'] ==10.0)
 a
+
+####################
+
+
+
+{'response': 
+    {'header': 
+        {'resultCode': '00', 'resultMsg': 'NORMAL SERVICE.'},
+    'body': 
+        {'items': 
+            {'item': 
+                [
+                    {'accDefRate': '1.4573418044', 'accExamCnt': '5192119', 'accExamCompCnt': '5043978', 'careCnt': '12028', 'clearCnt': '60180',
+                     'createDt': '2021-01-20 09:38:16.549', 'deathCnt': '1300', 'decideCnt': '73508', 'examCnt': '148141', 'resutlNegCnt': '4970470',
+                     'seq': '392', 'stateDt': '20210120', 'stateTime': '00:00', 'updateDt': '2021-04-20 15:23:25.562'},
+                    {'accDefRate': '1.4661941407', 'accExamCnt': '5140315', 'accExamCompCnt': '4985970', 'careCnt': '12353', 'clearCnt': '59468',
+                     'createDt': '2021-01-19 09:39:49.588', 'deathCnt': '1283', 'decideCnt': '73104', 'examCnt': '154345', 'resutlNegCnt': '4912866',
+                     'seq': '391', 'stateDt': '20210119', 'stateTime': '00:00', 'updateDt': '2021-04-20 15:23:34.538'}
+                ]
+             },
+        'numOfRows': '10', 'pageNo': '1', 'totalCount': '2'}
+    }
+}
