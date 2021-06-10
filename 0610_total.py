@@ -207,3 +207,6 @@ for idx_x in range(1, 13, 3):
 
     axes[2].plot(raw.time[idx_x+2:], raw.value.diff(idx_x+2).dropna(), label='Lag{}'.format(idx_x+2))
     axes[2].grid()
+
+
+
